@@ -1,0 +1,33 @@
+{
+  "name": "react-paper-button",
+  "version": "0.0.6",
+  "description": "React paper button",
+  "main": "./dist",
+  "scripts": {
+    "prepublish": "npm run build",
+    "build": "babel src --out-dir dist"
+  },
+  "author": "Vladimir Baranov",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/werbi/react-paper-button"
+  },
+  "keywords": [
+    "paper-button",
+    "paper",
+    "button",
+    "react-component"
+  ],
+  "dependencies": {
+    "prop-types": "^15.6.1",
+    "react": "^16.3.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1"
+  },
+  "homepage": "https://github.com/werbi/react-paper-button"
+}
