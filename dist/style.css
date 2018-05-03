@@ -1,0 +1,35 @@
+.paper-bc{
+  width: 10rem;
+  height: 3rem;
+  border-radius: .3rem;
+  border: 1px solid #cecece;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+  position: relative;
+  overflow: hidden;
+}
+.paper-bc:active::before{
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1px;
+  height: 1px;
+  transition: all 0.7s linear;
+  pointer-events: none;
+  background: #999;
+  opacity: .3;
+  border-radius: 50%;
+  animation: paper .7s linear 0s;
+}
+@keyframes paper {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(500);
+  }
+}
