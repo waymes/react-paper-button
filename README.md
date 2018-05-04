@@ -1,4 +1,4 @@
-# React Paper Button v0.0.6
+# React Paper Button v0.0.7
 
 ### Installation
 
@@ -9,20 +9,16 @@
 ### Adding to your react project
 
 ```javascript
-  import React, { Component } from 'react';
-  import PaperButton from 'react-paper-button';
+import React from 'react';
+import { render } from 'react-dom';
+import PaperButton from 'react-paper-button';
 
-  class MyComponent extends Component {
-    render(
-      return (
-        <div>
-          <PaperButton>
-            <span>Click me</span>
-          </PaperButton>
-        </div>
-      );
-    )
-  }
-
-  export default MyComponent;
+render(
+  <PaperButton
+    onClick={() => console.log('Clicked!')}
+  >
+    <span>Click me</span>
+  </PaperButton>,
+  document.getElementById('root')
+);
 ```
