@@ -27,20 +27,63 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var PaperButton = function (_React$Component) {
   _inherits(PaperButton, _React$Component);
 
-  function PaperButton() {
+  function PaperButton(props) {
     _classCallCheck(this, PaperButton);
 
-    return _possibleConstructorReturn(this, (PaperButton.__proto__ || Object.getPrototypeOf(PaperButton)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (PaperButton.__proto__ || Object.getPrototypeOf(PaperButton)).call(this, props));
+
+    _this.state = {
+      bubbles: {}
+    };
+    _this.bubbling = _this.bubbling.bind(_this);
+    return _this;
   }
 
   _createClass(PaperButton, [{
+    key: 'bubbling',
+    value: function bubbling(e) {
+      var _this2 = this;
+
+      var event = e.target;
+      var dim = event.getBoundingClientRect();
+      var x = (e.clientX - dim.left).toFixed();
+      var y = (e.clientY - dim.top).toFixed();
+
+      this.setState({ bubbles: { bubble: { x: x, y: y } } });
+      setTimeout(function () {
+        return _this2.setState({ bubbles: {} });
+      }, 500);
+      this.props.onClick(e);
+    }
+  }, {
     key: 'render',
     value: function render() {
-      var children = this.props.children;
+      var _props = this.props,
+          children = _props.children,
+          background = _props.background,
+          bubbleColor = _props.bubbleColor,
+          className = _props.className;
+      var bubbles = this.state.bubbles;
 
+      var renderBubbles = Object.values(bubbles).map(function (el, key) {
+        return _react2.default.createElement('span', {
+          key: key,
+          className: 'paper-bb',
+          style: {
+            background: bubbleColor,
+            top: el.y + 'px',
+            left: el.x + 'px'
+          }
+        });
+      });
       return _react2.default.createElement(
         'div',
-        { className: 'paper-bc' },
+        {
+          className: 'paper-bc ' + className,
+          style: { background: background },
+          onMouseDown: this.bubbling
+        },
+        renderBubbles,
         children
       );
     }
@@ -51,11 +94,17 @@ var PaperButton = function (_React$Component) {
 
 PaperButton.propTypes = {
   children: _propTypes2.default.node.isRequired,
-  backgroundColor: _propTypes2.default.string
+  onClick: _propTypes2.default.func,
+  background: _propTypes2.default.string,
+  bubbleColor: _propTypes2.default.string,
+  className: _propTypes2.default.string
 };
 
 PaperButton.defaultProps = {
-  backgroundColor: '#fff'
+  background: '#fff',
+  bubbleColor: '#999',
+  onClick: function onClick() {},
+  className: ''
 };
 
 exports.default = PaperButton;
