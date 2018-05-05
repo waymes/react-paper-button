@@ -1,9 +1,9 @@
-# React Paper Button v0.0.7
+# React Paper Button v0.1.0
 
 ### Installation
 
 ```
-  npm i react-paper-button
+npm i react-paper-button
 ```
 
 ### Adding to your react project
@@ -22,3 +22,13 @@ render(
   document.getElementById('root')
 );
 ```
+
+### Props
+
+| Name       | isRequired     | Value          |
+| ---------- | -------------- | -------------- |
+| children   | true           | node           |
+| onClick    | false          | func           |
+| className  | false          | string         |
+| background | false          | string         |
+| bubbleColor| false          | string         |

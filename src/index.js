@@ -6,28 +6,32 @@ class PaperButton extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      bubbles: {}
+      bubbles: []
     };
     this.bubbling = this.bubbling.bind(this);
   }
 
   bubbling(e) {
-    const event = e.target;
-    const dim = event.getBoundingClientRect();
+    const dim = e.target.getBoundingClientRect();
     const x = (e.clientX - dim.left).toFixed();
     const y = (e.clientY - dim.top).toFixed();
+    const timeStamp = Date.now();
 
-    this.setState({ bubbles: { bubble : { x, y }} });
-    setTimeout(() => this.setState({ bubbles: {} }), 500);
+    this.setState({ bubbles: [ ...this.state.bubbles, { x, y, id: timeStamp } ] });
+    setTimeout(() => {
+      const filteredBubbles = this.state.bubbles.filter(el => el.id !== timeStamp);
+      this.setState({ bubbles: filteredBubbles });
+    }, 500);
+
     this.props.onClick(e);
   }
 
   render() {
     const { children, background, bubbleColor, className } = this.props;
-    const { bubbles } = this.state;
-    const renderBubbles = Object.values(bubbles).map((el, key) => (
+    
+    const renderBubbles = this.state.bubbles.map(el => (
       <span
-        key={key}
+        key={el.id}
         className='paper-bb'
         style={{
           background: bubbleColor,
