@@ -22,12 +22,10 @@ class PaperButton extends React.Component {
       const filteredBubbles = this.state.bubbles.filter(el => el.id !== timeStamp);
       this.setState({ bubbles: filteredBubbles });
     }, 500);
-
-    this.props.onClick(e);
   }
 
   render() {
-    const { children, background, bubbleColor, className } = this.props;
+    const { children, background, bubbleColor, className, onClick } = this.props;
     
     const renderBubbles = this.state.bubbles.map(el => (
       <span
@@ -45,6 +43,7 @@ class PaperButton extends React.Component {
         className={`paper-bc ${className}`}
         style={{ background }}
         onMouseDown={this.bubbling}
+        onClick={onClick}
       >
         {renderBubbles}
         {children}

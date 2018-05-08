@@ -1,4 +1,4 @@
-# React Paper Button v0.1.0
+# React Paper Button v1.0.0
 
 ### Installation
 
