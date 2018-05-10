@@ -9,6 +9,7 @@ class PaperButton extends React.Component {
       bubbles: []
     };
     this.bubbling = this.bubbling.bind(this);
+    this.timeouts = [];
   }
 
   bubbling(e) {
@@ -18,10 +19,19 @@ class PaperButton extends React.Component {
     const timeStamp = Date.now();
 
     this.setState({ bubbles: [ ...this.state.bubbles, { x, y, id: timeStamp } ] });
-    setTimeout(() => {
+    this.timeouts.push(setTimeout(() => {
       const filteredBubbles = this.state.bubbles.filter(el => el.id !== timeStamp);
       this.setState({ bubbles: filteredBubbles });
-    }, 500);
+      this.timeouts.shift();
+    }, 500));
+  }
+
+  clearTimeouts() {
+    this.timeouts.forEach(clearTimeout);
+  }
+
+  componentWillUnmount() {
+    this.clearTimeouts();
   }
 
   render() {
